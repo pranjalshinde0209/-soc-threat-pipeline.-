@@ -1,0 +1,22 @@
+<group name="sysmon,powershell,mitre_attack,">
+
+  <rule id="100101" level="10">
+    <if_group>sysmon_process_creation</if_group>
+    <field name="win.eventdata.image">powershell.exe</field>
+    <match>-enc|-encodedcommand|-e </match>
+    <description>PowerShell spawned with Base64 Encoded Command</description>
+    <mitre>
+      <id>T1059.001</id>
+    </mitre>
+  </rule>
+
+  <rule id="100102" level="11">
+    <if_group>sysmon_process_creation</if_group>
+    <field name="win.eventdata.commandLine">net user * /add</field>
+    <description>Local account creation via net.exe command line</description>
+    <mitre>
+      <id>T1136.001</id>
+    </mitre>
+  </rule>
+
+</group>
